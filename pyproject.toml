@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry-plugin-bump"
-version = "0.0.5"
+version = "0.0.6"
 description = "poetry plugin to bump version"
 authors = ["trim21"]
 license = "MIT"
