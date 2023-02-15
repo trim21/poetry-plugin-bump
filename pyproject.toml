@@ -12,15 +12,7 @@ repository = "https://github.com/keattang/poetry-exec-plugin"
 python = "^3.7"
 #
 poetry = "^1.2.0"
-tomli = "^2.0.0"
 semver = "^2.13.0"
-
-[tool.poetry.dev-dependencies]
-black = "^22.3.0"
-flake8 = "^3.9.2"
-mypy = "^0.910"
-pytest = "^6.2.4"
-types-toml = "^0.1.5"
 
 [tool.poetry-plugin-bump]
 msg = 'bump: v{version}'

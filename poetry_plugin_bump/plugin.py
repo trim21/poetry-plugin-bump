@@ -53,7 +53,7 @@ class ExecCommand(EnvCommand):
             "git",
             "commit",
             "-m",
-            json.dumps(commit_message.format(version=target_version)),
+            commit_message.format(version=target_version),
         )
 
         tag_name = (
