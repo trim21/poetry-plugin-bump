@@ -22,7 +22,7 @@ class ExecCommand(EnvCommand):
         pyproject_folder_path = self.poetry.pyproject._file.path.parent
         pyproject_data = self.poetry.pyproject.data
 
-        target = self.argument("target_version")
+        target: str = self.argument("target_version")
         current_version = pyproject_data["tool"]["poetry"]["version"]
 
         if target == "major":
@@ -32,7 +32,7 @@ class ExecCommand(EnvCommand):
         elif target == "patch":
             target_version = semver.bump_patch(current_version)
         else:
-            target_version = str(semver.VersionInfo.parse(target))
+            target_version = str(semver.VersionInfo.parse(target.lstrip("v")))
 
         print(target_version)
         self.line(f"bump version to {target_version}")
