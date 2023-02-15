@@ -17,10 +17,6 @@ semver = "^2.13.0"
 [tool.poetry.group.dev.dependencies]
 pre-commit = {version = "^3.0.4", python = "^3.9"}
 
-[tool.poetry-plugin-bump]
-msg = 'bump: v{version}'
-tag_name = 'v{version}'
-
 [tool.poetry.plugins."poetry.application.plugin"]
 bump = "poetry_plugin_bump.plugin:ExecPlugin"
 
