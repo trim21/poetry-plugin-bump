@@ -29,9 +29,7 @@ jobs:
         uses: actions/setup-go@v3
 
       - name: Install git-chglog
-        run: |
-          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
-          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+        run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 
       - name: Generate Changelog
         run: |
