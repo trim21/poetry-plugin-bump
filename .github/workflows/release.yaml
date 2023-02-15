@@ -33,7 +33,9 @@ jobs:
           cache-dependency-path: .github/workflows/release.yaml
 
       - name: Install git-chglog
-        run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+        run: |
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 
       - name: Generate Changelog
         run: |
