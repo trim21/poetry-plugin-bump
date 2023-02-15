@@ -18,6 +18,11 @@ class ExecCommand(EnvCommand):
         ),
     ]
 
+    def exec(self, bin: str, *args: str) -> int:
+        ret = self.env.execute(bin, *args)
+        if ret:
+            exit(ret)
+
     def handle(self) -> Any:
         pyproject_folder_path = self.poetry.pyproject._file.path.parent
         pyproject_data = self.poetry.pyproject.data
@@ -39,8 +44,8 @@ class ExecCommand(EnvCommand):
 
         os.chdir(pyproject_folder_path)
 
-        self.env.execute("poetry", "version", target_version)
-        self.env.execute("git", "add", "pyproject.toml")
+        self.exec("poetry", "version", target_version)
+        self.exec("git", "add", "pyproject.toml")
 
         commit_message = (
             pyproject_data.get("tool", {})
@@ -48,7 +53,7 @@ class ExecCommand(EnvCommand):
             .get("commit_msg", "{version}")
         )
 
-        self.env.execute(
+        self.exec(
             "git",
             "commit",
             "-m",
@@ -61,7 +66,7 @@ class ExecCommand(EnvCommand):
             .get("tag_name", "v{version}")
         )
 
-        self.env.execute(
+        self.exec(
             "git",
             "tag",
             tag_name.format(version=target_version),
