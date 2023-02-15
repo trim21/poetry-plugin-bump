@@ -25,7 +25,7 @@ default config:
 
 ```toml
 [tool.poetry-plugin-bump]
-msg = 'bump: v{version}'
+commit_msg = 'bump: v{version}'
 tag_name = 'v{version}'
 ```
 
