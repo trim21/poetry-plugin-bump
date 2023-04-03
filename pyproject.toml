@@ -12,7 +12,7 @@ repository = "https://github.com/trim21/poetry-plugin-bump"
 python = "^3.7"
 #
 poetry = "^1.2.0"
-semver = "^2.13.0"
+semver = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = {version = "^3.0.4", python = "^3.9"}
