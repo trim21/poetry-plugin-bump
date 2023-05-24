@@ -24,7 +24,7 @@ class ExecCommand(EnvCommand):
             exit(ret)
 
     def handle(self) -> Any:
-        pyproject_folder_path = self.poetry.pyproject._file.path.parent
+        pyproject_folder_path = self.poetry.pyproject.file.path.parent
         pyproject_data = self.poetry.pyproject.data
 
         target: str = self.argument("target_version")

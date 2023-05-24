@@ -9,6 +9,7 @@ supported version:
 | poetry version  | plugin version |
 |:---------------:|:--------------:|
 | \>=1.2.0,<1.5.0 |     <0.1.0     |
+|    \>=1.5.0     |    >=0.1.0     |
 
 Installation requires poetry 1.2.0+. To install this plugin run:
 
