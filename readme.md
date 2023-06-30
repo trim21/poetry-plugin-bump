@@ -4,19 +4,19 @@ A plugin add command poetry command `poetry bump patch/minor/major`.
 
 Just like `npm version ...`, It will bump version, commit code and create git tag.
 
-from
-```shell
-poetry version patch
-git add pyproject.toml
-git commit -m '...'
-git tag ...
-```
 
-to a simple command
 ```shell
 poetry bump patch
 ```
 
+will replace previous commands
+
+```shell
+poetry version ...
+git add pyproject.toml
+git commit -m '...'
+git tag ...
+```
 
 ## Installation
 
