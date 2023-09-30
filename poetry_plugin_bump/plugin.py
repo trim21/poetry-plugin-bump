@@ -75,4 +75,4 @@ def factory() -> ExecCommand:
 
 class ExecPlugin(ApplicationPlugin):
     def activate(self, application: Application, *args: Any, **kwargs: Any) -> None:
-        application.command_loader.register_factory("bump", factory)
+        application.add(factory())
