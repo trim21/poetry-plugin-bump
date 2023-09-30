@@ -50,7 +50,7 @@ class ExecCommand(EnvCommand):
         commit_message = (
             pyproject_data.get("tool", {})
             .get("poetry-plugin-bump", {})
-            .get("commit_msg", "{version}")
+            .get("commit_msg", "bump: v{version}")
         )
 
         self.exec(
