@@ -47,23 +47,15 @@ class ExecCommand(EnvCommand):
         self.exec("poetry", "version", target_version)
         self.exec("git", "add", "pyproject.toml")
 
-        commit_message = (
-            pyproject_data.get("tool", {})
-            .get("poetry-plugin-bump", {})
-            .get("commit_msg", "bump: v{version}")
-        )
+        option = pyproject_data.get("tool", {}).get("poetry-plugin-bump", {})
+        commit_message = option.get("commit_msg", "bump: v{version}")
+        tag_name = option.get("tag_name", "v{version}")
 
         self.exec(
             "git",
             "commit",
             "-m",
             commit_message.format(version=target_version),
-        )
-
-        tag_name = (
-            pyproject_data.get("tool", {})
-            .get("poetry-plugin-bump", {})
-            .get("tag_name", "v{version}")
         )
 
         self.exec(
