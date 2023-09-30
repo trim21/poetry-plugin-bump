@@ -3,7 +3,7 @@ name: release
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*"
 
 jobs:
   release:
@@ -22,27 +22,17 @@ jobs:
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
 
-      # create github release
-      - name: Get Tag Name
-        run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          cache: true
-          cache-dependency-path: .github/workflows/release.yaml
-
-      - name: Install git-chglog
-        run: |
-          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
-          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
-
       - name: Generate Changelog
-        run: |
-          git-chglog "$TAG" | node -p 'require("fs").readFileSync(0).toString().trim()
-            .split("\n").slice(4).join("\n").trim()' | tee chglog.md
+        id: changelog
+        uses: requarks/changelog-action@v1.9.0
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+          writeToFile: false
+          restrictToTypes: feat,fix,revert
 
       - name: Upload Github Release
-        run: gh release create "$TAG" -F chglog.md ./dist/*
+        run: gh release create "${GITHUB_REF}" --notes "${CHANGELOG}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGELOG: "${{ steps.changelog.outputs.changes }}"
