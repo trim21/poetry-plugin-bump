@@ -28,16 +28,18 @@ class ExecCommand(EnvCommand):
         pyproject_data = self.poetry.pyproject.data
 
         target: str = self.argument("target_version")
-        current_version = pyproject_data["tool"]["poetry"]["version"]
+        current_version = semver.version.Version.parse(
+            pyproject_data["tool"]["poetry"]["version"]
+        )
 
         if target == "major":
-            target_version = semver.bump_major(current_version)
+            target_version = str(current_version.bump_major())
         elif target == "minor":
-            target_version = semver.bump_minor(current_version)
+            target_version = str(current_version.bump_minor())
         elif target == "patch":
-            target_version = semver.bump_patch(current_version)
+            target_version = str(current_version.bump_patch())
         else:
-            target_version = str(semver.VersionInfo.parse(target.lstrip("v")))
+            target_version = str(semver.Version.parse(target.lstrip("v")))
 
         print(target_version)
         self.line(f"bump version to {target_version}")
