@@ -18,7 +18,7 @@ class ExecCommand(EnvCommand):
         ),
     ]
 
-    def exec(self, bin: str, *args: str) -> int:
+    def exec(self, bin: str, *args: str):
         ret = self.env.execute(bin, *args)
         if ret:
             exit(ret)
